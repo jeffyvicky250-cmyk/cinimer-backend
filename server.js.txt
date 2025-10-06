@@ -1,0 +1,34 @@
+// Cinimer backend
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const multer = require('multer');
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use(express.static('uploads'));
+
+mongoose.connect('mongodb://localhost:27017/cinimer');
+
+const videoSchema = new mongoose.Schema({
+  title: String,
+  filename: String,
+});
+
+const Video = mongoose.model('Video', videoSchema);
+
+const upload = multer({ dest: 'uploads/' });
+
+app.post('/upload', upload.single('video'), async (req, res) => {
+  const video = new Video({ title: req.body.title, filename: req.file.filename });
+  await video.save();
+  res.json(video);
+});
+
+app.get('/videos', async (req, res) => {
+  const videos = await Video.find();
+  res.json(videos);
+});
+
+app.listen(4000, () => console.log('Cinimer backend running on 4000'));
