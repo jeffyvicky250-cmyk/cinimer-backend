@@ -10,7 +10,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static('uploads'));
-const mongoose = require("mongoose");
 
 mongoose.connect(
   "mongodb+srv://jeffyvicky250_db_user:zERbjw4pCHc9xWJS@shared.qszbgox.mongodb.net/?retryWrites=true&w=majority&appName=Shared"
