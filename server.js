@@ -6,6 +6,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const app = express();
+const port = process.env.PORT || 4000 
 
 app.use(cors());
 app.use(express.json());
