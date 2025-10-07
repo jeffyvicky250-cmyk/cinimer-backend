@@ -60,4 +60,6 @@ app.get('/videos', async (req, res) => {
   res.json(videos);
 });
 
-app.listen(4000, () => console.log('Cinimer backend running on 4000'));
+app.listen(process.env.PORT, '0.0.0.0', () => {
+  console.log('Server started!');
+});
